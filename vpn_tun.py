@@ -1,8 +1,8 @@
-import tunetap
+import pytun
 import socket
 
 def configure_tun():
-    tun = tunetap.TunTapDevice(name="tun0", mode='tun')
+    tun = pytun.TunTapDevice(name="tun0", flags=pytun.IFF_TUN)
     tun.addr = '10.0.0.1'
     tun.netmask = '255.255.255.0'
     tun.mtu = 1500
@@ -13,7 +13,7 @@ def configure_tun():
 def tun_to_socks(tun):
     socks_address = ("127.0.0.1", 1080)
     while True:
-        packet = tun.read()
+        packet = tun.read(4096)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect(socks_address)
             s.send(packet)
