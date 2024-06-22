@@ -97,7 +97,7 @@ if __name__ == "__main__":
     tun_ip = "10.8.0.1"
     tun_netmask = "24"
     socks_host = "127.0.0.1"
-    socks_port = 1081
+    socks_port = 1080
     username = "user1"
     password = "password1"
 
